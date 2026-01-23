@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 namespace Back.DTOs;
 public class CreateUsuarioDTO
 {
+    public int id { get; set; }
     public string nome { get; set; }
     public string senha { get; set; }
 }
