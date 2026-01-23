@@ -30,7 +30,7 @@ public class UsuarioService : IUsuarioService
         UsuarioModel NovoUsuario = new UsuarioModel
         {
             nome = DadosUsuario.nome,
-            senha = DadosUsuario.senha
+            senha = BCrypt.Net.BCrypt.HashPassword(DadosUsuario.senha)
         };
 
         //Salva o NovoUsuario
@@ -38,5 +38,25 @@ public class UsuarioService : IUsuarioService
         _ctx.SaveChanges();
     }
     //Fim Cadastrar Usuario
+    //
+
+    //
+    //Login Usuario
+    public void LoginUsuarioService(LoginUsuarioDTO LoginInfo)
+    {  
+        UsuarioModel? UsuarioExistente = _ctx.Usuarios.Find(LoginInfo.id);
+
+        if(UsuarioExistente == null)
+        {
+            throw new DomainException("Usuario não cadastrado");
+        }
+
+        //Verifica se as senhas são iguais
+        if(!BCrypt.Net.BCrypt.Verify(LoginInfo.senha, UsuarioExistente.senha))
+        {
+            throw new DomainException("Senha incorreta");
+        }        
+    }
+    //Fim Login
     //
 }

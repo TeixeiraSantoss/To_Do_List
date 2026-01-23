@@ -25,4 +25,15 @@ public class UsuarioController : ControllerBase
     }
     //Fim cadastro usuario
     //
+
+    //
+    //Login usuario
+    [HttpPost("login")]
+    public IActionResult LoginUsuario([FromBody] LoginUsuarioDTO LoginInfo)
+    {
+        _iusuarioService.LoginUsuarioService(LoginInfo);
+        return Ok("Login realizado com sucesso");
+    }
+    //Fim Login
+    //
 }

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "yNPABakUx/TK1EzN3IuEDSs1rj6vPL/5RNN1u9CpcijdmpwctVUl8ZJBUqZubtuuGkLbZb/hvxG0QOlXAj5vfw==",
+  "dgSpecHash": "IVEfgWbmoRO84qdfaRVTdMnmbUoOgCPve/OhIJ1jt1jfJxtvE3Jo3xX6xIJ15rdXSme+u2qF8tn8XS9LFrlDQw==",
   "success": true,
   "projectFilePath": "D:\\ESTUDO\\Desafio 8 Semanas\\To Do List\\Back\\Back.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\mathe\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.0\\microsoft.data.sqlite.core.6.0.0.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.0\\microsoft.entityframeworkcore.6.0.0.nupkg.sha512",

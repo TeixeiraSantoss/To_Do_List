@@ -4,4 +4,5 @@ namespace Back.Interfaces;
 public interface IUsuarioService
 {
     void CadastrarUsuarioService(CreateUsuarioDTO DadosUsuario);
+    void LoginUsuarioService(LoginUsuarioDTO LoginInfo);
 }
