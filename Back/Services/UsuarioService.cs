@@ -1,14 +1,20 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using Back.Data;
 using Back.DTOs;
 using Back.Interfaces;
 using Back.Models;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Back.Services;
 public class UsuarioService : IUsuarioService
 {
     private readonly AppDbContext _ctx;
-    public UsuarioService(AppDbContext ctx)
+    private readonly IConfiguration _configuration;
+    public UsuarioService(AppDbContext ctx, IConfiguration configuration)
     {
+        _configuration = configuration;
         _ctx = ctx;
     }
 
@@ -42,7 +48,7 @@ public class UsuarioService : IUsuarioService
 
     //
     //Login Usuario
-    public void LoginUsuarioService(LoginUsuarioDTO LoginInfo)
+    public string LoginUsuarioService(LoginUsuarioDTO LoginInfo)
     {  
         UsuarioModel? UsuarioExistente = _ctx.Usuarios.Find(LoginInfo.id);
 
@@ -56,6 +62,40 @@ public class UsuarioService : IUsuarioService
         {
             throw new DomainException("Senha incorreta");
         }        
+
+        //Criando o JWT
+            //Cria claims do token
+            var claim = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, LoginInfo.id.ToString()),
+                new Claim(ClaimTypes.Name, LoginInfo.nome)
+            };
+
+            //chave de segurança
+            var key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_configuration["Jwt:key"])
+            );
+
+            //credenciais de assinatura
+            var creds = new SigningCredentials(
+                key,
+                SecurityAlgorithms.HmacSha256
+            );
+
+            //expiração
+            var expiration = DateTime.UtcNow.AddHours(2);
+
+            //criação do token
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
+                claims: claim,
+                expires: expiration,
+                signingCredentials: creds
+            );
+        //fim criação do token
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
     //Fim Login
     //
