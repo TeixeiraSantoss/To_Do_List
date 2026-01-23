@@ -10,5 +10,6 @@ namespace Back.Models
         public int id { get; set; }
         public string nome { get; set; }
         public string senha { get; set; }
+        public ICollection<TarefaModel> Tarefas { get; set; } = new List<TarefaModel>();
     }
 }

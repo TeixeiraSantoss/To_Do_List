@@ -11,5 +11,7 @@ namespace Back.Models
         public string titulo { get; set; }
         public string descricao { get; set; }
         public StatusEnum status { get; set; }
+        public int UsuarioId { get; set; }
+        public UsuarioModel Usuario { get; set; }
     }
 }
