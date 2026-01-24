@@ -109,7 +109,18 @@ public class TarefaService : ITarefaService
 
     //
     //Excluir tarefa
+    public void ExcluirTarefaService(int id)
+    {
+        TarefaModel? tarefaExistente = _ctx.Tarefas.Find(id);
 
+        if(tarefaExistente == null)
+        {
+            throw new DomainException("Nenhuma tarefa encontrada");
+        }
+
+        _ctx.Tarefas.Remove(tarefaExistente);
+        _ctx.SaveChanges();
+    }
     //Fim excluir tarefa
     //
 }

@@ -46,4 +46,15 @@ public class TarefaController : ControllerBase
     }
     //Fim editar tarefa
     //
+
+    //
+    //Excluir tarefa
+    [HttpDelete("excluir/{id}")]
+    public IActionResult ExcluirTarefa([FromRoute] int id)
+    {
+        _iTarefaService.ExcluirTarefaService(id);
+        return Ok("Tarefa excluida com sucesso");
+    }
+    //Fim excluir tarefa
+    //
 }
