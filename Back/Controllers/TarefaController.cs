@@ -1,3 +1,5 @@
+using Back.DTOs.TarefaDTOs;
+using Back.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Back.Controllers;
@@ -6,4 +8,19 @@ namespace Back.Controllers;
 [Route("tarefa")]
 public class TarefaController : ControllerBase
 {
+    private readonly ITarefaService _iTarefaService;
+    public TarefaController(ITarefaService iTarefaService){
+        _iTarefaService = iTarefaService;
+    }
+
+    //
+    //Cadastrar tarefa
+    [HttpPost("cadastrar")]
+    public IActionResult CadastraTarefa([FromBody] CreateTarefaDTO DadosTarefa)
+    {
+        _iTarefaService.CadastrarTarefaService(DadosTarefa);
+        return Ok("Tarefa cadastrada com sucesso");
+    }
+    //Fim cadastrar tarefa
+    //
 }
