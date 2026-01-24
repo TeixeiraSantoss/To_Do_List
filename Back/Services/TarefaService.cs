@@ -60,4 +60,28 @@ public class TarefaService : ITarefaService
     }
     //Fim cadastrar tarefa
     //
+
+    //
+    //Listar tarefas
+    public ICollection<ReadTarefaDTO> ListarTarefas()
+    {
+        var userId = GetUserId();
+
+        ICollection<ReadTarefaDTO> tarefas = _ctx.Tarefas.Where(t => t.UsuarioId == userId)
+            .Select(t => new ReadTarefaDTO
+            {
+                titulo = t.titulo,
+                descricao = t.descricao,
+                status = t.status
+            }).ToList();
+
+        if(!tarefas.Any())
+        {
+            throw new DomainException("O usuário não possui tarefas cadastradas");
+        }
+        
+        return tarefas;
+    }
+    //Fim listar tarefas
+    //
 }
