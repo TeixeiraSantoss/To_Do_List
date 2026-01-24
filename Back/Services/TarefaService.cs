@@ -63,7 +63,7 @@ public class TarefaService : ITarefaService
 
     //
     //Listar tarefas
-    public ICollection<ReadTarefaDTO> ListarTarefas()
+    public ICollection<ReadTarefaDTO> ListarTarefasService()
     {
         var userId = GetUserId();
 
@@ -83,5 +83,33 @@ public class TarefaService : ITarefaService
         return tarefas;
     }
     //Fim listar tarefas
+    //
+
+    //
+    //Editar tarefa
+    public void EditarTarefaService(EditTarefaDTO NovosDadosTarefa)
+    {
+        TarefaModel? tarefaExistente = _ctx.Tarefas.Find(NovosDadosTarefa.id);
+
+        if(tarefaExistente == null)
+        {
+            throw new DomainException("Tarefa não cadastrada");
+        }
+
+        
+        tarefaExistente.titulo = NovosDadosTarefa.titulo;
+        tarefaExistente.descricao = NovosDadosTarefa.descricao;
+
+        _ctx.Tarefas.Update(tarefaExistente);
+        _ctx.SaveChanges();
+
+    }
+    //Fim editar tarefa
+    //
+
+    //
+    //Excluir tarefa
+
+    //Fim excluir tarefa
     //
 }

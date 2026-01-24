@@ -23,4 +23,27 @@ public class TarefaController : ControllerBase
     }
     //Fim cadastrar tarefa
     //
+
+    //
+    //Listar tarefas
+    [HttpGet("listar")]
+    public IActionResult ListarTarefas()
+    {
+        return Ok(_iTarefaService.ListarTarefasService());
+    }
+    //Fim listar tarefas
+    //
+
+    //
+    //Editar tarefa
+    [HttpPatch("editar/{id}")]
+    public IActionResult EditarTarefa([FromBody] EditTarefaDTO NovosDadosTarefa, [FromRoute] int id)
+    {
+        NovosDadosTarefa.id = id;
+        _iTarefaService.EditarTarefaService(NovosDadosTarefa);
+
+        return Ok("Tarefa editada com sucesso");
+    }
+    //Fim editar tarefa
+    //
 }
