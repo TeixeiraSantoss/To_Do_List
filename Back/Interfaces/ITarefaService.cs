@@ -7,4 +7,5 @@ public interface ITarefaService
     ICollection<ReadTarefaDTO> ListarTarefasService();
     void EditarTarefaService(EditTarefaDTO NovosDadosTarefa);
     void ExcluirTarefaService(int id);
+    void ConcluirTarefaService(int id);
 }

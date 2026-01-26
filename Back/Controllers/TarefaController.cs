@@ -57,4 +57,15 @@ public class TarefaController : ControllerBase
     }
     //Fim excluir tarefa
     //
+
+    //
+    //Concluir tarefa
+    [HttpPatch("concluir")]
+    public IActionResult ConcluirTarefa(int id)
+    {
+        _iTarefaService.ConcluirTarefaService(id);
+        return Ok("Tarefa concluida");
+    }
+    //Fim concluir tarefa
+    //
 }

@@ -2,7 +2,7 @@ namespace Back.Models
 {
     public enum StatusEnum
     {
-        Concluido = 1,
-        Pendente = 2
+        Pendente = 1,
+        Concluida = 2
     }
 }

@@ -123,4 +123,23 @@ public class TarefaService : ITarefaService
     }
     //Fim excluir tarefa
     //
+
+    //
+    //Concluir tarefa
+    public void ConcluirTarefaService(int id)
+    {
+        TarefaModel? tarefaExistente = _ctx.Tarefas.Find(id);
+
+        if(tarefaExistente == null)
+        {
+            throw new DomainException("Tarefa não existente");
+        }
+
+        tarefaExistente.status = StatusEnum.Concluida;
+
+        _ctx.Tarefas.Update(tarefaExistente);
+        _ctx.SaveChanges();
+    }
+    //Fim concluir tarefa
+    //
 }
