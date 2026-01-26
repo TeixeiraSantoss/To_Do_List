@@ -1,0 +1,11 @@
+<form>
+  <div class="mb-3">
+    <label class="form-label">Nome</label>
+    <input type="text" class="form-control" [(ngModel)]="nome" name="nome">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Senha</label>
+    <input type="text" class="form-control" [(ngModel)]="senha" name="senha">
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="onSubmit()">Cadastrar</button>
+</form>
