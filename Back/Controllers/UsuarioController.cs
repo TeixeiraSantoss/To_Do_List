@@ -36,4 +36,14 @@ public class UsuarioController : ControllerBase
     }
     //Fim Login
     //
+
+    //
+    //Listar Usuarios
+    [HttpGet("listar")]
+    public IActionResult ListarUsuario()
+    {
+        return Ok(_iusuarioService.ListarUsuarioService());
+    }
+    //Fim listar usuarios
+    //
 }

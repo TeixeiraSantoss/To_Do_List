@@ -99,4 +99,15 @@ public class UsuarioService : IUsuarioService
     }
     //Fim Login
     //
+
+    //
+    //Listar usuario
+    public ICollection<UsuarioModel> ListarUsuarioService()
+    {
+        ICollection<UsuarioModel> usuarios = _ctx.Usuarios.ToList();
+
+        return usuarios;
+    }
+    //Fim listar usuario    
+    //
 }
