@@ -36,6 +36,7 @@ public class UsuarioService : IUsuarioService
         UsuarioModel NovoUsuario = new UsuarioModel
         {
             nome = DadosUsuario.nome,
+            email = DadosUsuario.email,
             senha = BCrypt.Net.BCrypt.HashPassword(DadosUsuario.senha)
         };
 
@@ -50,7 +51,7 @@ public class UsuarioService : IUsuarioService
     //Login Usuario
     public string LoginUsuarioService(LoginUsuarioDTO LoginInfo)
     {  
-        UsuarioModel? UsuarioExistente = _ctx.Usuarios.Find(LoginInfo.id);
+        UsuarioModel? UsuarioExistente = _ctx.Usuarios.FirstOrDefault(u => u.email == LoginInfo.email);
 
         if(UsuarioExistente == null)
         {

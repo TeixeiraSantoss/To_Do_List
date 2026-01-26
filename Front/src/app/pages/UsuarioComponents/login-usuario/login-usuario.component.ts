@@ -1,3 +1,5 @@
+import { LoginUsuarioDTO } from './../../../DTOs/UsuarioDTOs/LoginUsuarioDTO';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./login-usuario.component.scss']
 })
 export class LoginUsuarioComponent {
+  constructor(private client: HttpClient){}
 
+  senha: string = ""
+
+  onSubmit(): void{
+    
+  }
 }
