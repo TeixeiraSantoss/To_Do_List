@@ -68,8 +68,8 @@ public class UsuarioService : IUsuarioService
             //Cria claims do token
             var claim = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, LoginInfo.id.ToString()),
-                new Claim(ClaimTypes.Name, LoginInfo.nome)
+                new Claim(ClaimTypes.NameIdentifier, UsuarioExistente.id.ToString()),
+                new Claim(ClaimTypes.Name, UsuarioExistente.nome)
             };
 
             //chave de segurança
