@@ -32,7 +32,7 @@ public class UsuarioController : ControllerBase
     public IActionResult LoginUsuario([FromBody] LoginUsuarioDTO LoginInfo)
     {
         _iusuarioService.LoginUsuarioService(LoginInfo);
-        return Ok("Login realizado com sucesso");
+        return Ok(_iusuarioService.LoginUsuarioService(LoginInfo));
     }
     //Fim Login
     //
