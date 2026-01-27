@@ -1,6 +1,7 @@
 import { LoginUsuarioDTO } from './../../../DTOs/UsuarioDTOs/LoginUsuarioDTO';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-login-usuario',
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./login-usuario.component.scss']
 })
 export class LoginUsuarioComponent {
-  constructor(private client: HttpClient){}
+  constructor(private client: HttpClient, private authService: AuthService){}
 
   email: string = ""
   senha: string = ""
@@ -19,9 +20,9 @@ export class LoginUsuarioComponent {
       senha: this.senha
     }
 
-    this.client.post("https://localhost:7058/usuario/login", dadosLogin).subscribe({
-      next: ()=>{
-        console.log("Login realizado com sucesso")
+    this.client.post<{token: string}>("https://localhost:7058/usuario/login", dadosLogin).subscribe({
+      next: (response)=>{
+        this.authService.setToken(response.token);
       },
       error: (erro)=>{
         console.log(erro)

@@ -33,4 +33,8 @@ export class ListarTarefaComponent {
       }
     })
   }
+
+  ngOnInit(): void{
+    this.Listar();
+  }
 }

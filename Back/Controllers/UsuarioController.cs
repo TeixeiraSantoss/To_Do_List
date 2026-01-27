@@ -31,8 +31,8 @@ public class UsuarioController : ControllerBase
     [HttpPost("login")]
     public IActionResult LoginUsuario([FromBody] LoginUsuarioDTO LoginInfo)
     {
-        _iusuarioService.LoginUsuarioService(LoginInfo);
-        return Ok(_iusuarioService.LoginUsuarioService(LoginInfo));
+        var token = _iusuarioService.LoginUsuarioService(LoginInfo);
+        return Ok(new {token = token});
     }
     //Fim Login
     //
