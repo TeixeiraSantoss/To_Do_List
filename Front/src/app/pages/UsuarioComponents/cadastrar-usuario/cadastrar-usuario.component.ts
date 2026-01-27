@@ -11,12 +11,14 @@ export class CadastrarUsuarioComponent {
   constructor(private client: HttpClient){}
 
   nome: string = "";
+  email: string = "";
   senha: string = "";
 
   onSubmit(): void{
     const novoUsuario: CreateUsuarioDTO = {
       id: 0,
       nome: this.nome,
+      email: this.email,
       senha: this.senha
     }
 
