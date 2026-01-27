@@ -8,4 +8,5 @@ public interface ITarefaService
     void EditarTarefaService(EditTarefaDTO NovosDadosTarefa);
     void ExcluirTarefaService(int id);
     void ConcluirTarefaService(int id);
+    EditTarefaDTO BuscarByIdService(int id);
 }

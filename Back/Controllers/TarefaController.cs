@@ -35,6 +35,18 @@ public class TarefaController : ControllerBase
     //
 
     //
+    //Buscar por id
+    [HttpGet("buscar/{id}")]
+    public IActionResult BuscarById(int id)
+    {
+        EditTarefaDTO tarefaEncontrada = _iTarefaService.BuscarByIdService(id);
+
+        return Ok(tarefaEncontrada);
+    }
+    //Fim buscar por id
+    //
+
+    //
     //Editar tarefa
     [HttpPatch("editar/{id}")]
     public IActionResult EditarTarefa([FromBody] EditTarefaDTO NovosDadosTarefa, [FromRoute] int id)

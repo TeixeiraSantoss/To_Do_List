@@ -70,6 +70,7 @@ public class TarefaService : ITarefaService
         ICollection<ReadTarefaDTO> tarefas = _ctx.Tarefas.Where(t => t.UsuarioId == userId)
             .Select(t => new ReadTarefaDTO
             {
+                id = t.id,
                 titulo = t.titulo,
                 descricao = t.descricao,
                 status = t.status
@@ -83,6 +84,28 @@ public class TarefaService : ITarefaService
         return tarefas;
     }
     //Fim listar tarefas
+    //
+
+    //
+    //Buscar por id
+    public EditTarefaDTO BuscarByIdService(int id)
+    {
+        TarefaModel? tarefaExistente = _ctx.Tarefas.FirstOrDefault(t => t.id == id);
+
+        if (tarefaExistente == null)
+        {
+            throw new DomainException("Nenhuma tarefa encontrada");
+        }
+
+        EditTarefaDTO tarefaEncontrada = new EditTarefaDTO
+        {
+          titulo = tarefaExistente.titulo,
+          descricao = tarefaExistente.descricao  
+        };
+
+        return tarefaEncontrada;
+    }
+    //Fim buscar por id
     //
 
     //

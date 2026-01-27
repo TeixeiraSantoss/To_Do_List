@@ -4,6 +4,7 @@ import { LoginUsuarioComponent } from './pages/UsuarioComponents/login-usuario/l
 import { CadastrarUsuarioComponent } from './pages/UsuarioComponents/cadastrar-usuario/cadastrar-usuario.component';
 import { ListarTarefaComponent } from './pages/TarefaComponents/listar-tarefa/listar-tarefa.component';
 import { CadastrarTarefaComponent } from './pages/TarefaComponents/cadastrar-tarefa/cadastrar-tarefa.component';
+import { EditarTarefaComponent } from './pages/TarefaComponents/editar-tarefa/editar-tarefa.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: "tarefa/cadastrar",
     component: CadastrarTarefaComponent
+  },
+  {
+    path: "tarefa/editar/:id",
+    component: EditarTarefaComponent
   }
 ];
 
