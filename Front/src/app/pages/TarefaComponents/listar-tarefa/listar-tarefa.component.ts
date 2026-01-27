@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ReadTarefaDTO } from 'src/app/DTOs/TarefaDTOs/ReadTarrefaDTO';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-listar-tarefa',
@@ -7,11 +9,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./listar-tarefa.component.scss']
 })
 export class ListarTarefaComponent {
-  constructor (private client: HttpClient){}
+  constructor (private client: HttpClient, private authService: AuthService){}
 
-  
+  tarefas: ReadTarefaDTO[] = []
 
   Listar(): void{
+    //Recupera token do sessionStorage
+    const token = this.authService.getToken();
 
+    //Cria o header que vai ser enviado na requisição
+    //O token vai ser enviado no header e o middleware faz a autenticação e verificação do token+s
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    this.client.get<ReadTarefaDTO[]>("https://localhost:7058/tarefa/listar", {headers: headers})
+    .subscribe({
+      next: (tarefasAPI)=>{
+        this.tarefas = tarefasAPI
+      },
+      error: (erro)=>{
+        console.log(erro)
+      }
+    })
   }
 }
