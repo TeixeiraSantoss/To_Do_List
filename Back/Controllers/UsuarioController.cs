@@ -21,7 +21,7 @@ public class UsuarioController : ControllerBase
     public IActionResult CadastrarUsuario([FromBody] CreateUsuarioDTO DadosUsuario)
     {
         _iusuarioService.CadastrarUsuarioService(DadosUsuario);
-        return Ok("Usuario cadastrado com sucesso");
+        return Ok(new {message = "Usuario cadastrado com sucesso"});
     }
     //Fim cadastro usuario
     //

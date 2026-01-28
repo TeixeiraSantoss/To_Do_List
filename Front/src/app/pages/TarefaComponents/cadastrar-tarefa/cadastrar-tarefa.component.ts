@@ -33,8 +33,8 @@ export class CadastrarTarefaComponent {
 
     this.client.post("https://localhost:7058/tarefa/cadastrar", novaTarefa, {headers: headers})
     .subscribe({
-      next: ()=>{
-        console.log("Tarefa cadastrada com sucesso")
+      next: (response)=>{
+        console.log("Sucesso: ", response)
         this.router.navigate(['tarefa/listar'])
       },
       error: (erro)=>{

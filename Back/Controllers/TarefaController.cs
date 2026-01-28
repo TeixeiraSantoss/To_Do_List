@@ -23,7 +23,7 @@ public class TarefaController : ControllerBase
     public IActionResult CadastraTarefa([FromBody] CreateTarefaDTO DadosTarefa)
     {
         _iTarefaService.CadastrarTarefaService(DadosTarefa);
-        return Ok("Tarefa cadastrada com sucesso");
+        return Ok(new {message = "Tarefa cadastrada com sucesso"});
     }
     //Fim cadastrar tarefa
     //
@@ -58,7 +58,7 @@ public class TarefaController : ControllerBase
         NovosDadosTarefa.id = id;
         _iTarefaService.EditarTarefaService(NovosDadosTarefa);
 
-        return Ok("Tarefa editada com sucesso");
+        return Ok(new {message = "Tarefa editada com sucesso"});
     }
     //Fim editar tarefa
     //
@@ -69,7 +69,7 @@ public class TarefaController : ControllerBase
     public IActionResult ExcluirTarefa([FromRoute] int id)
     {
         _iTarefaService.ExcluirTarefaService(id);
-        return Ok("Tarefa excluida com sucesso");
+        return Ok(new {message = "Tarefa excluida com sucesso"});
     }
     //Fim excluir tarefa
     //
@@ -80,7 +80,7 @@ public class TarefaController : ControllerBase
     public IActionResult ConcluirTarefa([FromRoute]int id, [FromBody]AlterarStatusDTO novoStatus)
     {
         _iTarefaService.ConcluirTarefaService(id, novoStatus);
-        return Ok("Tarefa concluida");
+        return Ok(new {message = "Tarefa concluida"});
     }
     //Fim concluir tarefa
     //

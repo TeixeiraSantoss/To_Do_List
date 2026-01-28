@@ -69,14 +69,12 @@ export class EditarTarefaComponent {
 
     this.client.patch<EditTarefaDTO>(`https://localhost:7058/tarefa/editar/${this.id}`, tarefaEditada, {headers: headers})
     .subscribe({
-      next: ()=>{
-        console.log("Tarefa editada com sucesso")
-        console.log("cheguei ate aqui")
-        
+      next: (response)=>{
+        console.log("Sucesso: ", response)
+        this.NavegarListar();        
       },
       error: (erro)=>{
         console.log(erro)
-        this.NavegarListar();
       }
     })
   }

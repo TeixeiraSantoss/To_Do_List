@@ -24,8 +24,8 @@ export class CadastrarUsuarioComponent {
     }
 
     this.client.post("https://localhost:7058/usuario/cadastrar", novoUsuario).subscribe({
-      next: () =>{
-        console.log("Usuario cadastrado com sucesso")
+      next: (response) =>{
+        console.log("Sucesso", response)
         this.router.navigate(['usuario/login'])
       },
       error: (erro) =>{

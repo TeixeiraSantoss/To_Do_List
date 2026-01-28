@@ -89,6 +89,10 @@ export class ListarTarefaComponent {
     })
   }
 
+  NavegarCadastroTarefa(): void{
+    this.router.navigate(['tarefa/cadastrar'])
+  }
+
   ngOnInit(): void{
     this.Listar();
   }
