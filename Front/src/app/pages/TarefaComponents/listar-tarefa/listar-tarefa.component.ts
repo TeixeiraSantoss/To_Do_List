@@ -39,7 +39,16 @@ export class ListarTarefaComponent {
   }
 
   Excluir(id: number): void{
-    this.client.delete(`https://localhost:7058/tarefa/excluir/${id}`)
+    //Recupera token do sessionStorage
+    const token = this.authService.getToken();
+
+    //Cria o header que vai ser enviado na requisição
+    //O token vai ser enviado no header e o middleware faz a autenticação e verificação do token+s
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    this.client.delete(`https://localhost:7058/tarefa/excluir/${id}`, {headers: headers})
     .subscribe({
       next: ()=>{
 
@@ -55,11 +64,20 @@ export class ListarTarefaComponent {
   }
 
   Concluir(id: number): void{
+    //Recupera token do sessionStorage
+    const token = this.authService.getToken();
+
+    //Cria o header que vai ser enviado na requisição
+    //O token vai ser enviado no header e o middleware faz a autenticação e verificação do token+s
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
     const statusConcluida: AlterarStatusDTO = {
       status: StatusEnum.Concluida
     }
 
-    this.client.patch<AlterarStatusDTO>(`https://localhost:7058/tarefa/concluir/${id}`, statusConcluida)
+    this.client.patch<AlterarStatusDTO>(`https://localhost:7058/tarefa/concluir/${id}`, statusConcluida, {headers: headers})
     .subscribe({
       next: ()=>{
         console.log("Tarefa concluida com sucesso")

@@ -1,7 +1,8 @@
 import { EditTarefaDTO } from './../../../DTOs/TarefaDTOs/EditTarefaDTO';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-editar-tarefa',
@@ -9,13 +10,22 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./editar-tarefa.component.scss']
 })
 export class EditarTarefaComponent {
-  constructor(private client: HttpClient, private route: ActivatedRoute){}
+  constructor(private client: HttpClient, private route: ActivatedRoute, private authService: AuthService){}
 
   id: number = 0;                                                    
   titulo: string = "";
   descricao: string = "";
 
   ngOnInit(): void{
+    //Recupera token do sessionStorage
+        const token = this.authService.getToken();
+    
+        //Cria o header que vai ser enviado na requisição
+        //O token vai ser enviado no header e o middleware faz a autenticação e verificação do token+s
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${token}`
+        });
+    
     //Recupera Id do URL
     this.route.params
     .subscribe({
@@ -25,7 +35,7 @@ export class EditarTarefaComponent {
         this.id = id;
 
         //Busca pela tarefa
-        this.client.get<EditTarefaDTO>(`https://localhost:7058/tarefa/buscar/${id}`)
+        this.client.get<EditTarefaDTO>(`https://localhost:7058/tarefa/buscar/${id}`, {headers: headers})
         .subscribe({
           next: (response)=>{
             this.titulo = response.titulo
@@ -46,7 +56,17 @@ export class EditarTarefaComponent {
       descricao: this.descricao
     }
 
-    this.client.patch<EditTarefaDTO>(`https://localhost:7058/tarefa/editar/${this.id}`, tarefaEditada)
+    //Recupera token do sessionStorage
+    const token = this.authService.getToken();
+
+    //Cria o header que vai ser enviado na requisição
+    //O token vai ser enviado no header e o middleware faz a autenticação e verificação do token+s
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+
+    this.client.patch<EditTarefaDTO>(`https://localhost:7058/tarefa/editar/${this.id}`, tarefaEditada, {headers: headers})
     .subscribe({
       next: ()=>{
         console.log("Tarefa editada com sucesso")

@@ -1,10 +1,13 @@
 using Back.DTOs.TarefaDTOs;
 using Back.Interfaces;
 using Back.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Back.Controllers;
 
+
+[Authorize]
 [ApiController]
 [Route("tarefa")]
 public class TarefaController : ControllerBase
