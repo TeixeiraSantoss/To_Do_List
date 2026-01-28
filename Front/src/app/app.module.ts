@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListarTarefaComponent } from './pages/TarefaComponents/listar-tarefa/listar-tarefa.component';
 import { CadastrarTarefaComponent } from './pages/TarefaComponents/cadastrar-tarefa/cadastrar-tarefa.component';
 import { EditarTarefaComponent } from './pages/TarefaComponents/editar-tarefa/editar-tarefa.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EditarTarefaComponent } from './pages/TarefaComponents/editar-tarefa/ed
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

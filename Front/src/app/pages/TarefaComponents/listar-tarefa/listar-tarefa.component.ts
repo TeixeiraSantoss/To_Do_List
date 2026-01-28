@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ReadTarefaDTO } from 'src/app/DTOs/TarefaDTOs/ReadTarrefaDTO';
 import { AuthService } from 'src/app/service/auth.service';
 
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./listar-tarefa.component.scss']
 })
 export class ListarTarefaComponent {
-  constructor (private client: HttpClient, private authService: AuthService){}
+  constructor (private client: HttpClient, private authService: AuthService, private route: Router){}
 
   tarefas: ReadTarefaDTO[] = []
 
@@ -32,6 +33,22 @@ export class ListarTarefaComponent {
         console.log(erro)
       }
     })
+  }
+
+  Excluir(id: number): void{
+    this.client.delete(`https://localhost:7058/tarefa/excluir/${id}`)
+    .subscribe({
+      next: ()=>{
+
+      },
+      error: (erro)=>{
+        console.log(erro)
+      }
+    })
+  }
+
+  Editar(id: number): void{
+    this.route.navigate([`tarefa/editar/${id}`])
   }
 
   ngOnInit(): void{

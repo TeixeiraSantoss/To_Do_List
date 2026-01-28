@@ -4,7 +4,7 @@
     <h6 class="card-subtitle mb-2 text-body-secondary" *ngIf="t.status == 1">Concluida</h6>
     <h6 class="card-subtitle mb-2 text-body-secondary" *ngIf="t.status == 2">Em Andamento</h6>
     <p class="card-text">{{t.descricao}}</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <button (click)="Excluir(t.id)">Excluir</button>
+    <button (click)="Editar(t.id)">Editar</button>
   </div>
 </div>
