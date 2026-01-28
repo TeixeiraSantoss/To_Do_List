@@ -1,9 +1,13 @@
 using Back.DTOs.TarefaDTOs;
 using Back.Interfaces;
+using Back.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Back.Controllers;
 
+
+[Authorize]
 [ApiController]
 [Route("tarefa")]
 public class TarefaController : ControllerBase
@@ -19,7 +23,7 @@ public class TarefaController : ControllerBase
     public IActionResult CadastraTarefa([FromBody] CreateTarefaDTO DadosTarefa)
     {
         _iTarefaService.CadastrarTarefaService(DadosTarefa);
-        return Ok("Tarefa cadastrada com sucesso");
+        return Ok(new {message = "Tarefa cadastrada com sucesso"});
     }
     //Fim cadastrar tarefa
     //
@@ -35,6 +39,18 @@ public class TarefaController : ControllerBase
     //
 
     //
+    //Buscar por id
+    [HttpGet("buscar/{id}")]
+    public IActionResult BuscarById(int id)
+    {
+        EditTarefaDTO tarefaEncontrada = _iTarefaService.BuscarByIdService(id);
+
+        return Ok(tarefaEncontrada);
+    }
+    //Fim buscar por id
+    //
+
+    //
     //Editar tarefa
     [HttpPatch("editar/{id}")]
     public IActionResult EditarTarefa([FromBody] EditTarefaDTO NovosDadosTarefa, [FromRoute] int id)
@@ -42,7 +58,7 @@ public class TarefaController : ControllerBase
         NovosDadosTarefa.id = id;
         _iTarefaService.EditarTarefaService(NovosDadosTarefa);
 
-        return Ok("Tarefa editada com sucesso");
+        return Ok(new {message = "Tarefa editada com sucesso"});
     }
     //Fim editar tarefa
     //
@@ -53,18 +69,18 @@ public class TarefaController : ControllerBase
     public IActionResult ExcluirTarefa([FromRoute] int id)
     {
         _iTarefaService.ExcluirTarefaService(id);
-        return Ok("Tarefa excluida com sucesso");
+        return Ok(new {message = "Tarefa excluida com sucesso"});
     }
     //Fim excluir tarefa
     //
 
     //
     //Concluir tarefa
-    [HttpPatch("concluir")]
-    public IActionResult ConcluirTarefa(int id)
+    [HttpPatch("concluir/{id}")]
+    public IActionResult ConcluirTarefa([FromRoute]int id, [FromBody]AlterarStatusDTO novoStatus)
     {
-        _iTarefaService.ConcluirTarefaService(id);
-        return Ok("Tarefa concluida");
+        _iTarefaService.ConcluirTarefaService(id, novoStatus);
+        return Ok(new {message = "Tarefa concluida"});
     }
     //Fim concluir tarefa
     //

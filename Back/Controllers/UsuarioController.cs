@@ -21,7 +21,7 @@ public class UsuarioController : ControllerBase
     public IActionResult CadastrarUsuario([FromBody] CreateUsuarioDTO DadosUsuario)
     {
         _iusuarioService.CadastrarUsuarioService(DadosUsuario);
-        return Ok("Usuario cadastrado com sucesso");
+        return Ok(new {message = "Usuario cadastrado com sucesso"});
     }
     //Fim cadastro usuario
     //
@@ -31,8 +31,8 @@ public class UsuarioController : ControllerBase
     [HttpPost("login")]
     public IActionResult LoginUsuario([FromBody] LoginUsuarioDTO LoginInfo)
     {
-        _iusuarioService.LoginUsuarioService(LoginInfo);
-        return Ok(_iusuarioService.LoginUsuarioService(LoginInfo));
+        var token = _iusuarioService.LoginUsuarioService(LoginInfo);
+        return Ok(new {token = token});
     }
     //Fim Login
     //

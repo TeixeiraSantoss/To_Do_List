@@ -8,19 +8,25 @@ import { LoginUsuarioComponent } from './pages/UsuarioComponents/login-usuario/l
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ListarTarefaComponent } from './pages/TarefaComponents/listar-tarefa/listar-tarefa.component';
+import { CadastrarTarefaComponent } from './pages/TarefaComponents/cadastrar-tarefa/cadastrar-tarefa.component';
+import { EditarTarefaComponent } from './pages/TarefaComponents/editar-tarefa/editar-tarefa.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     CadastrarUsuarioComponent,
     LoginUsuarioComponent,
-    ListarTarefaComponent
+    ListarTarefaComponent,
+    CadastrarTarefaComponent,
+    EditarTarefaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

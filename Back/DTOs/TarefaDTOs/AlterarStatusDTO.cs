@@ -6,11 +6,8 @@ using Back.Models;
 
 namespace Back.DTOs.TarefaDTOs
 {
-    public class ReadTarefaDTO
+    public class AlterarStatusDTO
     {
-        public int id { get; set; }
-        public string titulo { get; set; }
-        public string descricao { get; set; }
         public StatusEnum status { get; set; }
     }
 }
