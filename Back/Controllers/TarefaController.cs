@@ -1,5 +1,6 @@
 using Back.DTOs.TarefaDTOs;
 using Back.Interfaces;
+using Back.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Back.Controllers;
@@ -72,10 +73,10 @@ public class TarefaController : ControllerBase
 
     //
     //Concluir tarefa
-    [HttpPatch("concluir")]
-    public IActionResult ConcluirTarefa(int id)
+    [HttpPatch("concluir/{id}")]
+    public IActionResult ConcluirTarefa([FromRoute]int id, [FromBody]AlterarStatusDTO novoStatus)
     {
-        _iTarefaService.ConcluirTarefaService(id);
+        _iTarefaService.ConcluirTarefaService(id, novoStatus);
         return Ok("Tarefa concluida");
     }
     //Fim concluir tarefa

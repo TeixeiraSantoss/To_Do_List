@@ -1,10 +1,11 @@
 <div class="card" style="width: 18rem;">
   <div class="card-body" *ngFor="let t of tarefas">
     <h5 class="card-title">{{t.titulo}}</h5>
-    <h6 class="card-subtitle mb-2 text-body-secondary" *ngIf="t.status == 1">Concluida</h6>
-    <h6 class="card-subtitle mb-2 text-body-secondary" *ngIf="t.status == 2">Em Andamento</h6>
+    <h6 class="card-subtitle mb-2 text-body-secondary" *ngIf="t.status == 1">Em Andamento</h6>
+    <h6 class="card-subtitle mb-2 text-body-secondary" *ngIf="t.status == 2">Concluida</h6>
     <p class="card-text">{{t.descricao}}</p>
     <button (click)="Excluir(t.id)">Excluir</button>
     <button (click)="Editar(t.id)">Editar</button>
+    <button (click)="Concluir(t.id)">Concluir</button>
   </div>
 </div>

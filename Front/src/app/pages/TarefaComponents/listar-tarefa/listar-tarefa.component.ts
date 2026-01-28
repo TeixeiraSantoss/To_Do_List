@@ -1,7 +1,9 @@
+import { AlterarStatusDTO } from './../../../DTOs/TarefaDTOs/AlterarStatusDTO';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReadTarefaDTO } from 'src/app/DTOs/TarefaDTOs/ReadTarrefaDTO';
+import { StatusEnum } from 'src/app/models/StatusEnum';
 import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
@@ -28,6 +30,7 @@ export class ListarTarefaComponent {
     .subscribe({
       next: (tarefasAPI)=>{
         this.tarefas = tarefasAPI
+        console.table(tarefasAPI)
       },
       error: (erro)=>{
         console.log(erro)
@@ -49,6 +52,23 @@ export class ListarTarefaComponent {
 
   Editar(id: number): void{
     this.route.navigate([`tarefa/editar/${id}`])
+  }
+
+  Concluir(id: number): void{
+    const statusConcluida: AlterarStatusDTO = {
+      status: StatusEnum.Concluida
+    }
+
+    this.client.patch<AlterarStatusDTO>(`https://localhost:7058/tarefa/concluir/${id}`, statusConcluida)
+    .subscribe({
+      next: ()=>{
+        console.log("Tarefa concluida com sucesso")
+      },
+      error: (erro)=>{
+        console.log(statusConcluida)
+        console.log(erro)
+      }
+    })
   }
 
   ngOnInit(): void{

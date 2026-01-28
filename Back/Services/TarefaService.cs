@@ -149,7 +149,7 @@ public class TarefaService : ITarefaService
 
     //
     //Concluir tarefa
-    public void ConcluirTarefaService(int id)
+    public void ConcluirTarefaService(int id, AlterarStatusDTO novoStatus)
     {
         TarefaModel? tarefaExistente = _ctx.Tarefas.Find(id);
 
@@ -158,7 +158,7 @@ public class TarefaService : ITarefaService
             throw new DomainException("Tarefa não existente");
         }
 
-        tarefaExistente.status = StatusEnum.Concluida;
+        tarefaExistente.status = novoStatus.status;
 
         _ctx.Tarefas.Update(tarefaExistente);
         _ctx.SaveChanges();
