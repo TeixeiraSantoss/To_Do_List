@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CreateUsuarioDTO } from 'src/app/DTOs/UsuarioDTOs/CreateUsuarioDTO';
 
 @Component({
@@ -8,7 +9,7 @@ import { CreateUsuarioDTO } from 'src/app/DTOs/UsuarioDTOs/CreateUsuarioDTO';
   styleUrls: ['./cadastrar-usuario.component.scss']
 })
 export class CadastrarUsuarioComponent {
-  constructor(private client: HttpClient){}
+  constructor(private client: HttpClient, private router: Router){}
 
   nome: string = "";
   email: string = "";
@@ -25,6 +26,7 @@ export class CadastrarUsuarioComponent {
     this.client.post("https://localhost:7058/usuario/cadastrar", novoUsuario).subscribe({
       next: () =>{
         console.log("Usuario cadastrado com sucesso")
+        this.router.navigate(['usuario/login'])
       },
       error: (erro) =>{
         console.log(erro)

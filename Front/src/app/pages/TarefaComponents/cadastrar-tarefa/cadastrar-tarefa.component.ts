@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CreateTarefaDTO } from 'src/app/DTOs/TarefaDTOs/CreateTarefaDTO';
 import { StatusEnum } from 'src/app/models/StatusEnum';
 import { AuthService } from 'src/app/service/auth.service';
@@ -10,7 +11,7 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./cadastrar-tarefa.component.scss']
 })
 export class CadastrarTarefaComponent {
-  constructor(private client: HttpClient, private auth: AuthService){}
+  constructor(private client: HttpClient, private auth: AuthService, private router: Router){}
 
   titulo: string = "";
   descricao: string = "";
@@ -34,6 +35,7 @@ export class CadastrarTarefaComponent {
     .subscribe({
       next: ()=>{
         console.log("Tarefa cadastrada com sucesso")
+        this.router.navigate(['tarefa/listar'])
       },
       error: (erro)=>{
         console.log(erro)

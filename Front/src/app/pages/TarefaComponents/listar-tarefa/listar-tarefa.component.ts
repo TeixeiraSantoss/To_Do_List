@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./listar-tarefa.component.scss']
 })
 export class ListarTarefaComponent {
-  constructor (private client: HttpClient, private authService: AuthService, private route: Router){}
+  constructor (private client: HttpClient, private authService: AuthService, private router: Router){}
 
   tarefas: ReadTarefaDTO[] = []
 
@@ -51,7 +51,7 @@ export class ListarTarefaComponent {
     this.client.delete(`https://localhost:7058/tarefa/excluir/${id}`, {headers: headers})
     .subscribe({
       next: ()=>{
-
+        this.Listar()
       },
       error: (erro)=>{
         console.log(erro)
@@ -60,7 +60,7 @@ export class ListarTarefaComponent {
   }
 
   Editar(id: number): void{
-    this.route.navigate([`tarefa/editar/${id}`])
+    this.router.navigate([`tarefa/editar/${id}`])
   }
 
   Concluir(id: number): void{

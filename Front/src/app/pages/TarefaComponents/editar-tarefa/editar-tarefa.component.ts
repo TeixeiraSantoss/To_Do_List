@@ -1,7 +1,8 @@
+import { NgbDatepickerNavigateEvent } from './../../../../../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker.d';
 import { EditTarefaDTO } from './../../../DTOs/TarefaDTOs/EditTarefaDTO';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./editar-tarefa.component.scss']
 })
 export class EditarTarefaComponent {
-  constructor(private client: HttpClient, private route: ActivatedRoute, private authService: AuthService){}
+  constructor(private client: HttpClient, private route: ActivatedRoute, private authService: AuthService, private router: Router){}
 
   id: number = 0;                                                    
   titulo: string = "";
@@ -70,10 +71,17 @@ export class EditarTarefaComponent {
     .subscribe({
       next: ()=>{
         console.log("Tarefa editada com sucesso")
+        console.log("cheguei ate aqui")
+        
       },
       error: (erro)=>{
         console.log(erro)
+        this.NavegarListar();
       }
     })
+  }
+
+  NavegarListar(): void{
+    this.router.navigate(['tarefa/listar']);
   }
 }
