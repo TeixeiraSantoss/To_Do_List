@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CadastrarUsuarioComponent } from './pages/UsuarioComponents/cadastrar-usuario/cadastrar-usuario.component';
 import { LoginUsuarioComponent } from './pages/UsuarioComponents/login-usuario/login-usuario.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ListarTarefaComponent } from './pages/TarefaComponents/listar-tarefa/listar-tarefa.component';
 import { CadastrarTarefaComponent } from './pages/TarefaComponents/cadastrar-tarefa/cadastrar-tarefa.component';
@@ -26,7 +26,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

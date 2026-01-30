@@ -3,17 +3,39 @@
     <h1>Login</h1>
   </div>
   <div class="formBox">
-    <form>
+    <form [formGroup]="form">
+
       <div class="mb-3">
         <label class="form-label">Email</label>
-        <input type="text" class="form-control" [(ngModel)]="email" name="email">
+        <input type="text" class="form-control" formControlName="email" name="email">
+
+        <!-- Tratativa de errors -->
+        <div *ngIf="email?.touched && email?.invalid" class="invalid-feedback d-block">
+          <!-- trata as condições que foram estabelecidas para o input -->
+          <div *ngIf="email?.errors?.['required']">O email é obrigatorio</div>
+          <div *ngIf="email?.errors?.['minlength']">O email precisa ter no minimo 3 caracteres</div>
+          <div *ngIf="email?.errors?.['apenasEspacos']">O email não pode ter apenas espaços</div>
+        </div>
       </div>
+
       <div class="mb-3">
         <label class="form-label">Senha</label>
-        <input type="text" class="form-control" [(ngModel)]="senha" name="senha">
+        <input type="text" class="form-control" formControlName="senha" name="senha">
+
+        <!-- Tratativa de errors -->
+        <div *ngIf="senha?.touched && senha?.invalid" class="invalid-feedback d-block">
+          <!-- trata as condições que foram estabelecidas para o input -->
+          <div *ngIf="senha?.errors?.['required']">O senha é obrigatorio</div>
+          <div *ngIf="senha?.errors?.['minlength']">O senha precisa ter no minimo 3 caracteres</div>
+          <div *ngIf="senha?.errors?.['apenasEspacos']">O senha não pode ter apenas espaços</div>
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="messageErrors">
+          {{messageErrors}}
+        </div>
       </div>
+
       <button type="submit" class="btn btn-primary" (click)="onSubmit()">Login</button>
-      <button class="btn btn-primary" (click)="NavegarCadastro()">Cadastrar</button>
+      <button class="btn btn-info" (click)="NavegarCadastro()">Cadastrar</button>
     </form>
   </div>
 </div>

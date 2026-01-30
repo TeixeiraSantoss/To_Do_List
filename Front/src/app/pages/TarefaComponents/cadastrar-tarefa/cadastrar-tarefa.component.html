@@ -3,17 +3,38 @@
     <h1>Cadastrar Tarefa</h1>
   </div>
   <div class="formBox">
-    <form>
+    <form [formGroup]="form">
+
       <div class="mb-3">
         <label class="form-label">Titulo</label>
-        <input type="text" class="form-control" [(ngModel)]="titulo" name="titulo">
+        <input type="text" class="form-control" formControlName="titulo" name="titulo" autocomplete="off">
+          
+        <!-- Tratativa de errors -->
+        <div *ngIf="titulo?.touched && titulo?.invalid" class="invalid-feedback d-block">
+          <!-- trata as condições que foram estabelecidas para o input -->
+          <div *ngIf="titulo?.errors?.['required']">O titulo é obrigatorio</div>
+          <div *ngIf="titulo?.errors?.['minlength']">O titulo precisa ter no minimo 3 caracteres</div>
+          <div *ngIf="titulo?.errors?.['apenasEspacos']">O titulo não pode ter apenas espaços</div>
+        </div>
+
       </div>
+
       <div class="mb-3">
         <label class="form-label">Descrição</label>
         <br>
-        <textarea type="text" class="textarea" [(ngModel)]="descricao" name="descricao"></textarea>
+        <textarea type="text" class="textarea" formControlName="descricao" name="descricao"></textarea>
+
+        <!-- Tratativa de errors -->
+        <div *ngIf="descricao?.touched && descricao?.invalid" class="invalid-feedback d-block">
+          <!-- trata as condições que foram estabelecidas para o input -->
+          <div *ngIf="descricao?.errors?.['required']">O descricao é obrigatorio</div>
+          <div *ngIf="descricao?.errors?.['minlength']">O descricao precisa ter no minimo 3 caracteres</div>
+          <div *ngIf="descricao?.errors?.['apenasEspacos']">O descricao não pode ter apenas espaços</div>
+        </div>
+
       </div>
+
       <button type="submit" class="btn btn-primary" (click)="onSubmit()">Cadastrar</button>
     </form>
   </div>
-</div>
+</div> 
